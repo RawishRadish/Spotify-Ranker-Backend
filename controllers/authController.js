@@ -24,7 +24,7 @@ const register = async (req, res) => {
         const { accessToken, refreshToken, userId } = await authService.register(username, password);
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: false,
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'None',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
