@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (als je iets transpileert, bijv. via TypeScript of Babel)
+dist/
+build/
+
+# OS files
+.DS_Store
+
+# IDE/editor settings
+.vscode/
+.idea/
