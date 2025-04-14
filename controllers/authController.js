@@ -18,6 +18,7 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
+    console.log('REQ.BODY: ', req.body);
     try {
         const { username, password } = req.body;
         const { accessToken, refreshToken, userId } = await authService.register(username, password);
