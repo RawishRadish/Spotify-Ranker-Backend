@@ -16,10 +16,24 @@ const userRoutes = require('./routes/userRoutes');
 const spotifyAuthRoutes = require('./routes/spotifyAuthRoutes');
 const { authenticateToken } = require('./middlewares/authMiddleware');
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://spotify-ranking.vercel.app',
+    'https://spotify-ranker.com',
+    'https://www.spotify-ranker.com',
+];
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 app.use(session({
