@@ -6,7 +6,7 @@ const login = async (req, res) => {
         const { accessToken, refreshToken, userId } = await authService.login(username, password);
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: false,
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'None',
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
@@ -40,7 +40,7 @@ const refreshUserToken = async (req, res) => {
         const { accessToken, refreshToken, username, userId } = await authService.refreshUserToken(req.cookies.refreshToken);
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: false,
+            secure: process.env.NODE_ENV,
             sameSite: 'None',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
