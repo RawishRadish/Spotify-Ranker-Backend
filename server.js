@@ -36,6 +36,7 @@ app.use(cors({
     },
     credentials: true
 }));
+app.set('trust proxy', 1);
 app.use(session({
     store: new (require('connect-pg-simple')(session))({
         pool: pool,
@@ -45,6 +46,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
+    proxy: true,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24,
         secure: process.env.NODE_ENV === 'production',
