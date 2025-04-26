@@ -17,6 +17,7 @@ const getSpotifyAuthURL = async (req, res) => {
         }
 
         console.log('Session after setting userId:', req.session);
+        console.log('Session ID at connect:', req.sessionID);
 
         try {
             const authURL = spotifyAuthService.generateSpotifyAuthUrl();
@@ -30,6 +31,7 @@ const getSpotifyAuthURL = async (req, res) => {
 
 const handleSpotifyCallback = async (req, res) => {
     console.log('Session at callback:', req.session);
+    console.log('Session ID at callback:', req.sessionID);
     try {
         const { code } = req.query;
         const userId = req.session.userId;
