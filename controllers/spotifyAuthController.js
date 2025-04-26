@@ -10,6 +10,15 @@ const getSpotifyAuthURL = async (req, res) => {
 
     req.session.userId = req.user.id;
 
+    req.session.save((err) => {
+        if (err) {
+            console.log('Session save error:', err);
+            return res.status(500).json({ message: 'Could not save session' })
+        }
+    })
+
+    console.log('Session after setting userId:', req.session);
+
     try {
         const authURL = spotifyAuthService.generateSpotifyAuthUrl();
         res.json({ authURL });
@@ -20,6 +29,7 @@ const getSpotifyAuthURL = async (req, res) => {
 };
 
 const handleSpotifyCallback = async (req, res) => {
+    console.log('Session at callback:', req.session);
     try {
         const { code } = req.query;
         const userId = req.session.userId;
