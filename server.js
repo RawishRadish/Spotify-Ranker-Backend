@@ -18,7 +18,7 @@ const { authenticateToken } = require('./middlewares/authMiddleware');
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://spotify-ranking.vercel.app',
+    'https://spotify-ranking-frontend.vercel.app',
     'https://spotify-ranker.com',
     'https://www.spotify-ranker.com',
 ];
