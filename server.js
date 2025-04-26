@@ -50,7 +50,8 @@ app.use(session({
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
         sameSite: 'None',
-    } // secure: true in production
+        domain: '.spotify-ranker.com',
+    }
 }));
 
 app.get('/', (req, res) => {
