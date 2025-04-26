@@ -15,17 +15,17 @@ const getSpotifyAuthURL = async (req, res) => {
             console.log('Session save error:', err);
             return res.status(500).json({ message: 'Could not save session' })
         }
+
+        console.log('Session after setting userId:', req.session);
+
+        try {
+            const authURL = spotifyAuthService.generateSpotifyAuthUrl();
+            res.json({ authURL });
+        } catch (error) {
+            res.status(500).json({ message: 'Error getting Spotify auth URL' });
+            console.log('Error getting Spotify auth URL:', error);
+        }
     })
-
-    console.log('Session after setting userId:', req.session);
-
-    try {
-        const authURL = spotifyAuthService.generateSpotifyAuthUrl();
-        res.json({ authURL });
-    } catch (error) {
-        res.status(500).json({ message: 'Error getting Spotify auth URL' });
-        console.log('Error getting Spotify auth URL:', error);
-    }
 };
 
 const handleSpotifyCallback = async (req, res) => {
